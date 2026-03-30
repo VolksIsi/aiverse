@@ -1,0 +1,26 @@
+name: Weekly Content Update
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Every Monday at 9:00 UTC
+  workflow_dispatch:
+
+jobs:
+  update-content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update last_updated timestamp
+        run: |
+          node -e "
+          const fs = require('fs');
+          const config = JSON.parse(fs.readFileSync('data/site-config.json'));
+          config.last_updated = new Date().toISOString().split('T')[0];
+          fs.writeFileSync('data/site-config.json', JSON.stringify(config, null, 2));
+          "
+      - name: Commit changes
+        run: |
+          git config --global user.name 'AIVerse Agent'
+          git config --global user.email 'agent@aiverse.bot'
+          git add data/
+          git diff --staged --quiet || git commit -m "🤖 Weekly update - $(date +%Y-%m-%d)"
+          git push

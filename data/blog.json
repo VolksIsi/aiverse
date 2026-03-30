@@ -1,0 +1,28 @@
+{
+  "posts": [
+    {
+      "id": "jasper-vs-copyai-2026",
+      "title": "Jasper AI vs Copy.ai 2026: Which AI Writer Reigns Supreme?",
+      "excerpt": "We tested both tools for 30 days. Here's the honest verdict.",
+      "url": "#",
+      "date": "2026-03-28",
+      "active": true
+    },
+    {
+      "id": "ai-tools-youtube-2026",
+      "title": "Best AI Tools for YouTube Creators in 2026",
+      "excerpt": "From scripting to thumbnails — the exact stack top creators use.",
+      "url": "#",
+      "date": "2026-03-25",
+      "active": true
+    },
+    {
+      "id": "surfer-seo-case-study",
+      "title": "How I Made $3,000 with Surfer SEO: Case Study",
+      "excerpt": "Step-by-step breakdown of a real affiliate campaign.",
+      "url": "#",
+      "date": "2026-03-20",
+      "active": true
+    }
+  ]
+}

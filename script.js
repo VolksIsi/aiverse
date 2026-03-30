@@ -1,3 +1,153 @@
+// Data Loader Module
+const DataLoader = {
+  async loadProducts() {
+    const res = await fetch('./data/products.json');
+    return await res.json();
+  },
+  async loadBlog() {
+    const res = await fetch('./data/blog.json');
+    return await res.json();
+  },
+  async loadConfig() {
+    const res = await fetch('./data/site-config.json');
+    return await res.json();
+  }
+};
+
+// Renderer Module
+const Renderer = {
+  renderProducts(products) {
+    const container = document.getElementById('products-container');
+    if (!container) return;
+    
+    // Sort by rank
+    const sortedProducts = products.sort((a, b) => a.rank - b.rank);
+    
+    let html = '<div class="tools-grid">';
+    
+    sortedProducts.forEach(product => {
+      if (!product.link_active) return;
+      
+      const stars = '★'.repeat(Math.floor(product.rating)) + '☆'.repeat(5 - Math.floor(product.rating));
+      const prosHtml = product.pros.map(pro => `<div class="feature">✓ ${pro}</div>`).join('');
+      const consHtml = product.cons.map(con => `<div class="feature">✗ ${con}</div>`).join('');
+      
+      html += `
+        <div class="tool-card ${product.featured ? 'featured' : ''}">
+          ${product.badge ? `<div class="tool-badge" style="background: ${product.badge_color}">${product.badge}</div>` : ''}
+          <div class="tool-header">
+            <h3>${product.name}</h3>
+            <div class="rating">
+              <span class="stars">${stars}</span>
+              <span class="rating-text">${product.rating}/5</span>
+            </div>
+          </div>
+          <div class="tool-description">
+            <p>${product.tagline}</p>
+          </div>
+          <div class="tool-features">
+            ${prosHtml}
+          </div>
+          <div class="tool-pricing">
+            <span class="price">$${product.price_starting}/mo</span>
+            <span class="original-price">$${Math.round(product.price_starting * 2.5)}/mo</span>
+          </div>
+          <button class="tool-cta" onclick="handleAffiliateClick('${product.id}', '${product.affiliate_url}')">
+            Get ${product.commission_percent}% Off →
+          </button>
+        </div>
+      `;
+    });
+    
+    html += '</div>';
+    container.innerHTML = html;
+  },
+  
+  renderComparison(products) {
+    const container = document.getElementById('comparison-container');
+    if (!container) return;
+    
+    const activeProducts = products.filter(p => p.link_active);
+    
+    let html = `
+      <div class="comparison-table-wrapper">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              ${activeProducts.map(p => `<th>${p.name}</th>`).join('')}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Primary Use</td>
+              ${activeProducts.map(p => `<td>${p.category}</td>`).join('')}
+            </tr>
+            <tr>
+              <td>Starting Price</td>
+              ${activeProducts.map(p => `<td>$${p.price_starting}/month</td>`).join('')}
+            </tr>
+            <tr>
+              <td>Commission</td>
+              ${activeProducts.map(p => `<td>${p.commission_percent}% ${p.commission_type}</td>`).join('')}
+            </tr>
+            <tr>
+              <td>Rating</td>
+              ${activeProducts.map(p => `<td>${p.rating}/5 (${p.review_count} reviews)</td>`).join('')}
+            </tr>
+            <tr>
+              <td>Best For</td>
+              ${activeProducts.map(p => `<td>${p.category}</td>`).join('')}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+    
+    container.innerHTML = html;
+  },
+  
+  renderBlog(posts) {
+    const container = document.getElementById('blog-container');
+    if (!container) return;
+    
+    const activePosts = posts.filter(p => p.active);
+    
+    let html = '<div class="blog-grid">';
+    
+    activePosts.forEach(post => {
+      html += `
+        <article class="blog-card">
+          <div class="blog-content">
+            <h3>${post.title}</h3>
+            <p>${post.excerpt}</p>
+            <a href="${post.url}" class="blog-link" onclick="handleBlogClick('${post.id}')">Read Review →</a>
+          </div>
+        </article>
+      `;
+    });
+    
+    html += '</div>';
+    container.innerHTML = html;
+  }
+};
+
+// Last Updated Module
+const LastUpdated = {
+  render(lastUpdated) {
+    const footerElement = document.querySelector('.copyright p');
+    if (footerElement) {
+      const date = new Date(lastUpdated);
+      const formattedDate = date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+      footerElement.innerHTML = `&copy; 2026 AIVerse. Last updated: ${formattedDate}`;
+    }
+  }
+};
+
 // Smooth scrolling for navigation links
 function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
@@ -317,11 +467,38 @@ document.addEventListener('visibilitychange', function() {
 });
 
 // Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     console.log('AIVerse initialized successfully');
     
     // Add loading complete indicator
     document.body.classList.add('loaded');
+    
+    // Load data and render components
+    try {
+        const [products, blogPosts, config] = await Promise.all([
+            DataLoader.loadProducts(),
+            DataLoader.loadBlog(),
+            DataLoader.loadConfig()
+        ]);
+        
+        // Render all components
+        Renderer.renderProducts(products.products);
+        Renderer.renderComparison(products.products);
+        Renderer.renderBlog(blogPosts.posts);
+        LastUpdated.render(config.last_updated);
+        
+        console.log('Data loaded and rendered successfully');
+    } catch (error) {
+        console.error('Error loading data:', error);
+        // Fallback: show error message to user
+        const errorHtml = `
+            <div style="text-align: center; padding: 50px; color: #ef4444;">
+                <h2>⚠️ Unable to load data</h2>
+                <p>Please refresh the page or check your connection.</p>
+            </div>
+        `;
+        document.getElementById('products-container').innerHTML = errorHtml;
+    }
     
     // Initialize cookie consent
     initCookieConsent();

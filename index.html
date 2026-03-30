@@ -187,90 +187,8 @@
                 <h2>Top 3 AI Tools for 2026</h2>
                 <p>Hand-picked tools that deliver real results, tested by our team</p>
             </div>
-            <div class="tools-grid">
-                <!-- Tool 1 -->
-                <div class="tool-card featured">
-                    <div class="tool-badge">BEST OVERALL</div>
-                    <div class="tool-header">
-                        <h3>Jasper AI</h3>
-                        <div class="rating">
-                            <span class="stars">★★★★★</span>
-                            <span class="rating-text">4.9/5</span>
-                        </div>
-                    </div>
-                    <div class="tool-description">
-                        <p>The #1 AI writing assistant that creates blog posts, social media content, and marketing copy in minutes.</p>
-                    </div>
-                    <div class="tool-features">
-                        <div class="feature">✓ 50+ Content Templates</div>
-                        <div class="feature">✓ Brand Voice Training</div>
-                        <div class="feature">✓ SEO Integration</div>
-                        <div class="feature">✓ 29 Languages</div>
-                    </div>
-                    <div class="tool-pricing">
-                        <span class="price">$39/mo</span>
-                        <span class="original-price">$99/mo</span>
-                    </div>
-                    <button class="tool-cta" onclick="handleAffiliateClick('jasper', 'https://www.jasper.ai/partners/affiliates')">
-                        Get 60% Off →
-                    </button>
-                </div>
-
-                <!-- Tool 2 -->
-                <div class="tool-card">
-                    <div class="tool-badge">BEST FOR VIDEO</div>
-                    <div class="tool-header">
-                        <h3>Pictory AI</h3>
-                        <div class="rating">
-                            <span class="stars">★★★★☆</span>
-                            <span class="rating-text">4.7/5</span>
-                        </div>
-                    </div>
-                    <div class="tool-description">
-                        <p>Turn scripts into engaging videos with AI avatars and stock footage. Perfect for content creators.</p>
-                    </div>
-                    <div class="tool-features">
-                        <div class="feature">✓ 10M+ Stock Videos</div>
-                        <div class="feature">✓ AI Voice Generation</div>
-                        <div class="feature">✓ Auto Captioning</div>
-                        <div class="feature">✓ 40+ Languages</div>
-                    </div>
-                    <div class="tool-pricing">
-                        <span class="price">$29/mo</span>
-                        <span class="original-price">$67/mo</span>
-                    </div>
-                    <button class="tool-cta" onclick="handleAffiliateClick('pictory', 'https://pictory.ai/partner-with-pictory')">
-                        Start Free Trial →
-                    </button>
-                </div>
-
-                <!-- Tool 3 -->
-                <div class="tool-card">
-                    <div class="tool-badge">BEST FOR SEO</div>
-                    <div class="tool-header">
-                        <h3>Surfer SEO</h3>
-                        <div class="rating">
-                            <span class="stars">★★★★☆</span>
-                            <span class="rating-text">4.6/5</span>
-                        </div>
-                    </div>
-                    <div class="tool-description">
-                        <p>Optimize your content for search engines with AI-powered SEO analysis and content strategies.</p>
-                    </div>
-                    <div class="tool-features">
-                        <div class="feature">✓ Real-time SERP Analysis</div>
-                        <div class="feature">✓ Content Editor</div>
-                        <div class="feature">✓ Keyword Research</div>
-                        <div class="feature">✓ Site Audit Tool</div>
-                    </div>
-                    <div class="tool-pricing">
-                        <span class="price">$69/mo</span>
-                        <span class="original-price">$129/mo</span>
-                    </div>
-                    <button class="tool-cta" onclick="handleAffiliateClick('surfer', 'https://surferseo.com/affiliate-program/')">
-                        Try Surfer SEO →
-                    </button>
-                </div>
+            <div id="products-container">
+                <!-- Products rendered by JS from data/products.json -->
             </div>
         </div>
     </section>
@@ -282,61 +200,8 @@
                 <h2>Side-by-Side Comparison</h2>
                 <p>Find the perfect AI tool for your specific needs</p>
             </div>
-            <div class="comparison-table-wrapper">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Jasper AI</th>
-                            <th>Pictory AI</th>
-                            <th>Surfer SEO</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Primary Use</td>
-                            <td>Content Writing</td>
-                            <td>Video Creation</td>
-                            <td>SEO Optimization</td>
-                        </tr>
-                        <tr>
-                            <td>Starting Price</td>
-                            <td>$39/month</td>
-                            <td>$29/month</td>
-                            <td>$69/month</td>
-                        </tr>
-                        <tr>
-                            <td>Free Trial</td>
-                            <td>7 days</td>
-                            <td>14 days</td>
-                            <td>7 days</td>
-                        </tr>
-                        <tr>
-                            <td>AI Templates</td>
-                            <td>50+</td>
-                            <td>20+</td>
-                            <td>N/A</td>
-                        </tr>
-                        <tr>
-                            <td>Multi-language</td>
-                            <td>29 languages</td>
-                            <td>40+ languages</td>
-                            <td>English only</td>
-                        </tr>
-                        <tr>
-                            <td>Best For</td>
-                            <td>Bloggers, Marketers</td>
-                            <td>Video Creators</td>
-                            <td>SEO Specialists</td>
-                        </tr>
-                        <tr>
-                            <td>Support</td>
-                            <td>24/7 Chat</td>
-                            <td>Email Support</td>
-                            <td>24/7 Chat</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div id="comparison-container">
+                <!-- Comparison table rendered by JS from data/products.json -->
             </div>
         </div>
     </section>
@@ -485,28 +350,8 @@
                 <h2>Latest AI Tool Reviews</h2>
                 <p>In-depth analysis and real-world testing of the latest AI tools</p>
             </div>
-            <div class="blog-grid">
-                <article class="blog-card">
-                    <div class="blog-content">
-                        <h3>Jasper AI vs Copy.ai 2026: Which AI Writer Reigns Supreme?</h3>
-                        <p>We tested both tools head-to-head for 30 days. Find out which AI writing assistant delivers better content, faster results, and more value for your money.</p>
-                        <a href="#" class="blog-link" onclick="handleBlogClick('jasper-vs-copyai')">Read Review →</a>
-                    </div>
-                </article>
-                <article class="blog-card">
-                    <div class="blog-content">
-                        <h3>Best AI Tools for YouTube Creators in 2026</h3>
-                        <p>From script writing to video generation, discover the AI tools that top YouTubers use to grow their channels and save 20+ hours per week.</p>
-                        <a href="#" class="blog-link" onclick="handleBlogClick('youtube-ai-tools')">Read Review →</a>
-                    </div>
-                </article>
-                <article class="blog-card">
-                    <div class="blog-content">
-                        <h3>How I Made $3,000 with Surfer SEO: Case Study</h3>
-                        <p>Real numbers from a 3-month experiment. See exactly how I used AI-powered SEO to rank #1 and generate consistent affiliate income.</p>
-                        <a href="#" class="blog-link" onclick="handleBlogClick('surfer-seo-case-study')">Read Review →</a>
-                    </div>
-                </article>
+            <div id="blog-container">
+                <!-- Blog posts rendered by JS from data/blog.json -->
             </div>
         </div>
     </section>

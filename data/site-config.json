@@ -1,0 +1,12 @@
+{
+  "site_name": "AIVerse",
+  "tagline": "Your AI-Powered Workflow Starts Here",
+  "base_url": "https://volksisi.github.io/aiverse",
+  "last_updated": "2026-03-30",
+  "maintenance": {
+    "link_check_interval_days": 1,
+    "price_check_interval_days": 7,
+    "content_update_interval_days": 7,
+    "new_products_interval_days": 30
+  }
+}
