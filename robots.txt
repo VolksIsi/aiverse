@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.log$
+
+Sitemap: https://volksisi.github.io/aiverse/sitemap.xml
+
+# Crawl-delay: 1 (optional: be respectful to servers)
